@@ -43,6 +43,10 @@ def test():
     print("Test")
 
 
+
+def amelaa():
+    pass
+
 def reach(lista, num: int):
     if (lista is None) or  (num < 0) or  (num >= lista.numElem):
         return None
