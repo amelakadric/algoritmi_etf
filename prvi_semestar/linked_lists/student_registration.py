@@ -41,6 +41,7 @@ def addStudent(lista, element):
 
 def test():
     print("Test")
+    print("Test 2");
 
 
 
