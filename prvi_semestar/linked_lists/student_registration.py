@@ -1,7 +1,7 @@
 from random import randrange, random
 
 #domaci iz ASPA 1, drugi zadatak
-## Make this in English
+#homework from Algorithms and Data Structures, problem 2
 
 class Student:
     def __init__(self, name, surname, brIn:int, sp, year:int):
@@ -38,15 +38,6 @@ def addStudent(lista, element):
 
     lista.tail = element
     lista.numElem += 1
-
-def test():
-    print("Test")
-    print("Test 2");
-
-
-
-def amelaa():
-    pass
 
 def reach(lista, num: int):
     if (lista is None) or  (num < 0) or  (num >= lista.numElem):
