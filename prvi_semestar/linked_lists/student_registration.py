@@ -1,6 +1,7 @@
 from random import randrange, random
 
 #domaci iz ASPA 1, drugi zadatak
+## Make this in English
 
 class Student:
     def __init__(self, name, surname, brIn:int, sp, year:int):
@@ -37,6 +38,9 @@ def addStudent(lista, element):
 
     lista.tail = element
     lista.numElem += 1
+
+def test():
+    print("Test")
 
 
 def reach(lista, num: int):
