@@ -1,5 +1,7 @@
 from random import randrange, random
 
+#domaci iz ASPA 1, drugi zadatak
+
 class Student:
     def __init__(self, name, surname, brIn:int, sp, year:int):
         self.name=name
