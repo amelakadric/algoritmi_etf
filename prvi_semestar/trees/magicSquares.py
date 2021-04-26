@@ -1,3 +1,4 @@
+# VERZIJA ZA MOODLE
 class Node:
 
     def __init__(self, data):
@@ -18,9 +19,6 @@ class Node:
 
         return level
 
-    # def __repr__(self):
-    #     printSquare(self.data)
-
     def printTree(self):
         razmak = ' ' * self.getLevel()
         prefiks = razmak + "|__" if self.parent else""
@@ -33,39 +31,6 @@ class Node:
     def printNode(self):
         r = printSquare(self.data)
         print("{}\n".format(r))
-
-
-def preOrder(root):
-    if root is None:
-        return
-    stek = []
-    stek.append(root)
-    while len(stek) > 0:
-        node = stek.pop()
-        pass
-
-
-# class Node:
-#     def __init__(self, data):
-
-#         self.children = []
-#         self.data = data
-
-#     def __repr__(self):
-#         pass
-
-
-# def makeRoot(kvadrat):
-#     root=Node(kvadrat)
-
-#     return
-
-
-# def newNode(kvadrat):
-
-
-# def addChild(kvadrat1, kvadrat2):
-#     pass
 
 
 # -----obrada matrice-
@@ -99,7 +64,7 @@ def beginning():
             kvadrat[j].append(lista[i])
         j += 1
 
-    print(kvadrat)
+    print(printSquare(kvadrat))
     return kvadrat, skup
 
 
@@ -246,7 +211,7 @@ def formiranje(node, skup):
                         child = Node(child)
                         node.addChild(child)
                         skup2.remove(k)
-                        formiranje(child, skup2)
+                        #formiranje(child, skup2)
 
 
 def printSquare(kvadrat):
@@ -261,7 +226,16 @@ def printSquare(kvadrat):
 
 def findLeaves(root):
     leaves = []
-    # obrada
+    stek = []
+    stek.append(root)
+    while (len(stek) > 0):
+        node = stek.pop()
+        if len(node.children) > 0:
+            for i in range(len(node.children)-1, -1):
+                stek.append(i)
+        else:
+            leaves.append(node)
+
     return leaves
 
 
@@ -277,7 +251,10 @@ def isSolution(kvadrat):
 
 def isPerfect(matrix):
     # obrada
+
     pass
+
+# -----------MAIN----------
 
 
 while True:
@@ -330,7 +307,7 @@ while True:
         # print leaves if isSolution==True
         leaves = findLeaves(root)
         for leaf in leaves:
-            if isSolution == True:
+            if isSolution(leaf) == True:
                 leaf.printNode()
 
     elif b == 5:
