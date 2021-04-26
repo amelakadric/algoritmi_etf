@@ -1,17 +1,68 @@
-class Tree():
-    def __init__(self, name='root', children=None):
-        self.name = name
+class Node:
+
+    def __init__(self, data):
         self.children = []
-        if children is not None:
-            for child in children:
-                self.add_child(child)
+        self.data = data
+        self.parent = None
+
+    def addChild(self, child):
+        child.parent = self
+        self.children.append(child)
+
+    def getLevel(self):
+        level = 0
+        p = self.parent
+        while p:
+            level += 1
+            p = p.parent
+
+        return level
 
     def __repr__(self):
-        return self.name
+        printSquare(self.data)
 
-    def addChild(self, node):
-        assert isinstance(node, Tree)
-        self.children.append(node)
+    def printTree(self):
+        razmak = ' ' * self.getLevel()
+        prefiks = razmak + "|__" if self.parent else""
+        print(prefiks+self.data)
+        if len(self.children) > 0:
+            for child in self.children:
+                child.printTree()
+
+
+# class Tree:
+#     def createNode(self, data):
+#         return Node(data)
+
+#     def insert(self, node , data):
+
+#         if node is None:
+#             return self.createNode(data)
+#         # if data is smaller than parent , insert it into left side
+#         # if data < node.data:
+#         #     node.left = self.insert(node.left, data)
+#         # elif data > node.data:
+#         #     node.right = self.insert(node.right, data)
+#         self.children.append()
+
+#         return node
+
+
+# class Tree():
+#     def __init__(self, name, children=None, data):
+#         self.name = name
+#         self.data=data
+#         self.children = []
+#         if children is not None:
+#             for child in children:
+#                 self.addchild(child)
+
+#     def __repr__(self):
+#         return self.name
+
+#     def addChild(self, node):
+#         assert isinstance(node, Tree)
+#         self.children.append(node)
 
 
 # class Node:
@@ -177,10 +228,8 @@ def isProgression(skup):
     for i in range(len(skup)-1):
         if (skup[i+1]-skup[i]) != r:
             return False
+
     return True
-
-
-l
 
 
 def karakZbir(kvadrat, skup, n):
@@ -204,20 +253,39 @@ def ukloniIzSkupa(skup, kvadrat):
 
 def formiranje(kvadrat, skup):
     skup = ukloniIzSkupa(skup, kvadrat)
+    for k in skup:
+        skup2 = skup.copy()
+        kv2 = kvadrat.copy()
+        for j in range(len(kvadrat)):
+            for i in range(len(kvadrat)):
+                if kvadrat[j][i] == 0:
+                    kv2[j][i] = k
+                    r = isMagic(kv2)
+                    if r == 0 or r == 1:
+                        # addnode
+                        skup2.remove(k)
+                        formiranje(kv2, skup2)
+
+
+def printSquare(kvadrat):
+    for j in range(len(kvadrat)):
+        for i in range(len(kvadrat)):
+            print(kvadrat[j][i], end="")
+
+
+def isSolution(kvadrat):
+    nula = False
+    for j in range(len(kvadrat)):
+        for i in range(len(kvadrat)):
+            if kvadrat[j][i] == 0:
+                nula = True
+                break
+    return nula
 
 
 def isPerfect(matrix):
     pass
 
-
-# try:
-#     kvadrat, skup = beginning()
-# except TypeError:
-#     # ako je duzina skupa veca od kvadrata
-#     pass
-
-
-# slucaj=isMagic(kvadrat, skup)
 
 while True:
     print("______MENI______\n"
