@@ -18,16 +18,31 @@ class Node:
 
         return level
 
-    def __repr__(self):
-        printSquare(self.data)
+    # def __repr__(self):
+    #     printSquare(self.data)
 
     def printTree(self):
         razmak = ' ' * self.getLevel()
         prefiks = razmak + "|__" if self.parent else""
-        print(prefiks+self.data)
+        r = printSquare(self.data)
+        print(prefiks + r)
         if len(self.children) > 0:
             for child in self.children:
                 child.printTree()
+
+    def printNode(self):
+        r = printSquare(self.data)
+        print("{}\n".format(r))
+
+
+def preOrder(root):
+    if root is None:
+        return
+    stek = []
+    stek.append(root)
+    while len(stek) > 0:
+        node = stek.pop()
+        pass
 
 
 # class Node:
@@ -216,58 +231,52 @@ def ukloniIzSkupa(skup, kvadrat):
     return skup
 
 
-# def formiranje(kvadrat, skup):
-
-#     skup = ukloniIzSkupa(skup, kvadrat)
-#     for k in skup:
-#         skup2 = skup.copy()
-#         kv2 = kvadrat.copy()
-#         for j in range(len(kvadrat)):
-#             for i in range(len(kvadrat)):
-#                 if kvadrat[j][i] == 0:
-#                     kv2[j][i] = k
-#                     r = isMagic(kv2)
-#                     if r == 0 or r == 1:
-#                         child=Node(kv2)
-#                         # addnode
-#                         skup2.remove(k)
-#                         formiranje(kv2, skup2)
-
 def formiranje(node, skup):
 
     skup = ukloniIzSkupa(skup, node.data)
     for k in skup:
         skup2 = skup.copy()
         child = node.data.copy()
-        for j in range(len node.data)):
-            for i in range(len node.data)):
+        for j in range(len(node.data)):
+            for i in range(len(node.data)):
                 if node.data[j][i] == 0:
-                    child[j][i]=k
-                    r=isMagic(child)
+                    child[j][i] = k
+                    r = isMagic(child, skup)
                     if r == 0 or r == 1:
-                        child=Node(child)
+                        child = Node(child)
                         node.addChild(child)
                         skup2.remove(k)
                         formiranje(child, skup2)
 
 
 def printSquare(kvadrat):
+    s = ''
     for j in range(len(kvadrat)):
         for i in range(len(kvadrat)):
-            print(kvadrat[j][i], end=" ")
+            s += str(kvadrat[j][i])+' '
+        if j != len(kvadrat)-1:
+            s += "\n"
+    return s
+
+
+def findLeaves(root):
+    leaves = []
+    # obrada
+    return leaves
 
 
 def isSolution(kvadrat):
-    nula=False
+    nula = False
     for j in range(len(kvadrat)):
         for i in range(len(kvadrat)):
             if kvadrat[j][i] == 0:
-                nula=True
+                nula = True
                 break
     return nula
 
 
 def isPerfect(matrix):
+    # obrada
     pass
 
 
@@ -276,12 +285,14 @@ while True:
           "Izaberite opciju\n"
           "1. Zadavanje pocetnog stanja kvadratu\n"
           "2. Provera da li kvadrat moze biti magican\n"
-          "3. Ispis resenja\n"
-          "4. Kraj programa\n")
+          "3. Ispis stabla\n"
+          "4. Ispis resenja\n"
+          "5. Ispis savrsenih\n"
+          "6. Kraj programa\n")
 
     try:
-        b=int(input())
-        if b < 0 or b > 4:
+        b = int(input())
+        if b < 0 or b > 6:
             print("Unesite ispravnu opciju\n")
             continue
     except:
@@ -290,24 +301,41 @@ while True:
 
     if b == 1:
         try:
-            kvadrat, skup=beginning()
+            kvadrat, skup = beginning()
         except TypeError:
             print("Uneli ste prevelik skup. Pokusajte ponovo")
             # ako je duzina skupa veca od kvadrata
 
     elif b == 2:
-        slucaj=isMagic(kvadrat, skup)
+        slucaj = isMagic(kvadrat, skup)
         if slucaj == 0:
             print("Pocetno stanje je validirano. (code 0)")
-            root=Node(kvadrat)
+            root = Node(kvadrat)
+            formiranje(root, skup)
+
         elif slucaj == 1:
             print("Pocetno stanje je validirano. (code 1)")
-            root=Node(kvadrat)
+            root = Node(kvadrat)
+            formiranje(root, skup)
+
         elif slucaj == 2:
             print("Pocetno stanje nije validno. (code 2)")
         elif slucaj == 3:
             print("Pocetno stanje nije validno. (code 3)")
+
     elif b == 3:
-        pass
+        root.printTree()
+
     elif b == 4:
+        # print leaves if isSolution==True
+        leaves = findLeaves(root)
+        for leaf in leaves:
+            if isSolution == True:
+                leaf.printNode()
+
+    elif b == 5:
+        # isPerfect
+        pass
+
+    elif b == 6:
         break
