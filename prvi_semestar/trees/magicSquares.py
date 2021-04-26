@@ -177,8 +177,10 @@ def isProgression(skup):
     for i in range(len(skup)-1):
         if (skup[i+1]-skup[i]) != r:
             return False
-
     return True
+
+
+l
 
 
 def karakZbir(kvadrat, skup, n):
