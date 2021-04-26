@@ -30,41 +30,6 @@ class Node:
                 child.printTree()
 
 
-# class Tree:
-#     def createNode(self, data):
-#         return Node(data)
-
-#     def insert(self, node , data):
-
-#         if node is None:
-#             return self.createNode(data)
-#         # if data is smaller than parent , insert it into left side
-#         # if data < node.data:
-#         #     node.left = self.insert(node.left, data)
-#         # elif data > node.data:
-#         #     node.right = self.insert(node.right, data)
-#         self.children.append()
-
-#         return node
-
-
-# class Tree():
-#     def __init__(self, name, children=None, data):
-#         self.name = name
-#         self.data=data
-#         self.children = []
-#         if children is not None:
-#             for child in children:
-#                 self.addchild(child)
-
-#     def __repr__(self):
-#         return self.name
-
-#     def addChild(self, node):
-#         assert isinstance(node, Tree)
-#         self.children.append(node)
-
-
 # class Node:
 #     def __init__(self, data):
 
@@ -251,34 +216,53 @@ def ukloniIzSkupa(skup, kvadrat):
     return skup
 
 
-def formiranje(kvadrat, skup):
-    skup = ukloniIzSkupa(skup, kvadrat)
+# def formiranje(kvadrat, skup):
+
+#     skup = ukloniIzSkupa(skup, kvadrat)
+#     for k in skup:
+#         skup2 = skup.copy()
+#         kv2 = kvadrat.copy()
+#         for j in range(len(kvadrat)):
+#             for i in range(len(kvadrat)):
+#                 if kvadrat[j][i] == 0:
+#                     kv2[j][i] = k
+#                     r = isMagic(kv2)
+#                     if r == 0 or r == 1:
+#                         child=Node(kv2)
+#                         # addnode
+#                         skup2.remove(k)
+#                         formiranje(kv2, skup2)
+
+def formiranje(node, skup):
+
+    skup = ukloniIzSkupa(skup, node.data)
     for k in skup:
         skup2 = skup.copy()
-        kv2 = kvadrat.copy()
-        for j in range(len(kvadrat)):
-            for i in range(len(kvadrat)):
-                if kvadrat[j][i] == 0:
-                    kv2[j][i] = k
-                    r = isMagic(kv2)
+        child = node.data.copy()
+        for j in range(len node.data)):
+            for i in range(len node.data)):
+                if node.data[j][i] == 0:
+                    child[j][i]=k
+                    r=isMagic(child)
                     if r == 0 or r == 1:
-                        # addnode
+                        child=Node(child)
+                        node.addChild(child)
                         skup2.remove(k)
-                        formiranje(kv2, skup2)
+                        formiranje(child, skup2)
 
 
 def printSquare(kvadrat):
     for j in range(len(kvadrat)):
         for i in range(len(kvadrat)):
-            print(kvadrat[j][i], end="")
+            print(kvadrat[j][i], end=" ")
 
 
 def isSolution(kvadrat):
-    nula = False
+    nula=False
     for j in range(len(kvadrat)):
         for i in range(len(kvadrat)):
             if kvadrat[j][i] == 0:
-                nula = True
+                nula=True
                 break
     return nula
 
@@ -296,7 +280,7 @@ while True:
           "4. Kraj programa\n")
 
     try:
-        b = int(input())
+        b=int(input())
         if b < 0 or b > 4:
             print("Unesite ispravnu opciju\n")
             continue
@@ -306,17 +290,19 @@ while True:
 
     if b == 1:
         try:
-            kvadrat, skup = beginning()
+            kvadrat, skup=beginning()
         except TypeError:
             print("Uneli ste prevelik skup. Pokusajte ponovo")
             # ako je duzina skupa veca od kvadrata
 
     elif b == 2:
-        slucaj = isMagic(kvadrat, skup)
+        slucaj=isMagic(kvadrat, skup)
         if slucaj == 0:
             print("Pocetno stanje je validirano. (code 0)")
+            root=Node(kvadrat)
         elif slucaj == 1:
             print("Pocetno stanje je validirano. (code 1)")
+            root=Node(kvadrat)
         elif slucaj == 2:
             print("Pocetno stanje nije validno. (code 2)")
         elif slucaj == 3:
