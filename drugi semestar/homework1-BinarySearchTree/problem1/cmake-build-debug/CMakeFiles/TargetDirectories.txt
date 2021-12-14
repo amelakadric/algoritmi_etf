@@ -1,0 +1,3 @@
+C:/Users/sejo9/Desktop/prvi domaci ASP2/zadatak1/cmake-build-debug/CMakeFiles/zadatak1.dir
+C:/Users/sejo9/Desktop/prvi domaci ASP2/zadatak1/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/sejo9/Desktop/prvi domaci ASP2/zadatak1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
