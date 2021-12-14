@@ -2,10 +2,10 @@
 #include <fstream>
 #include "tree.h"
 
-// B* tree implemetation 
+// B* tree implemetation
+// hell of a homework
 
 using namespace std;
-
 
 int main() {
     Tree stablo= Tree(4);
