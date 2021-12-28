@@ -108,6 +108,7 @@ bool HashTable::deleteKey(Student* s) {
         for(i=0; i<buckets[h].size; i++){
             if(tmp->student->getBrIndexa()==k) {
                 tmp->info=Deleted;
+                this->brKljuceva--;
                 return true;
             }
         }
@@ -149,14 +150,12 @@ ostream &operator<<(ostream &os, HashTable& ht) {
                     tmp=tmp->next;
                     continue;
                 }
-
-                    tmp->student->printStudent();
-                    tmp = tmp->next;
+                tmp->student->printStudent();
+                tmp = tmp->next;
                 }
             else
                 break;
         }
-
         cout<<endl;
     }
 

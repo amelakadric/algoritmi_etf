@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+C:/Users/sejo9/Documents/PROJECTS/fax/algoritmi_etf/drugi semestar/homework3-HashTables/HashTable.cpp
+HashTable.h
+C:/Users/sejo9/Documents/PROJECTS/fax/algoritmi_etf/drugi semestar/homework3-HashTables/HashTable.h
+
 C:/Users/sejo9/Documents/PROJECTS/fax/algoritmi_etf/drugi semestar/homework3-HashTables/HashTable.h
 iostream
 -
@@ -13,14 +17,6 @@ student.h
 C:/Users/sejo9/Documents/PROJECTS/fax/algoritmi_etf/drugi semestar/homework3-HashTables/student.h
 string
 -
-
-C:/Users/sejo9/Documents/PROJECTS/fax/algoritmi_etf/drugi semestar/homework3-HashTables/main.cpp
-iostream
--
-HashTable.h
-C:/Users/sejo9/Documents/PROJECTS/fax/algoritmi_etf/drugi semestar/homework3-HashTables/HashTable.h
-student.h
-C:/Users/sejo9/Documents/PROJECTS/fax/algoritmi_etf/drugi semestar/homework3-HashTables/student.h
 
 C:/Users/sejo9/Documents/PROJECTS/fax/algoritmi_etf/drugi semestar/homework3-HashTables/student.h
 iostream

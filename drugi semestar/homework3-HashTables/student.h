@@ -7,13 +7,16 @@
 using namespace std;
 
 class Student {
+public:
     unsigned int brIndexa;
     string imePrezime;
     string listaPredmeta;
-public:
 
     unsigned int getBrIndexa() const;
+    const string &getImePrezime() const;
+    const string &getListaPredmeta() const;
     Student(int brInd, string imePrez, string sviPred);
+    Student(const Student *student);
     ~Student();
 
     void printStudent();

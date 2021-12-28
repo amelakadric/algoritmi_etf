@@ -22,3 +22,17 @@ Student::~Student() {
 
 }
 
+const string &Student::getImePrezime() const {
+    return imePrezime;
+}
+
+const string &Student::getListaPredmeta() const {
+    return listaPredmeta;
+}
+
+Student::Student(const Student *student) {
+    this->imePrezime=student->getImePrezime();
+    this->listaPredmeta=student->getListaPredmeta();
+    this->brIndexa=student->getBrIndexa();
+}
+
