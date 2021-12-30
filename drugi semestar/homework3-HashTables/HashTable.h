@@ -9,13 +9,14 @@ using namespace std;
 enum Type{Full, Empty, NotEmpty, Deleted};
 
 struct StudentNode{
-    Student* student;
+    Student student;
+
     enum Type info=Empty;
     StudentNode *next= nullptr, *prev= nullptr;
-//    StudentNode(Student *st){
-//        student=st;
-//        info=NotEmpty;
-//    }
+    StudentNode(Student st){
+        student=st;
+        info=NotEmpty;
+    }
 };
 
 struct HashNode{
@@ -31,6 +32,7 @@ class HashTable {
     HashNode* buckets;
 
 public:
+    HashTable(){}
     HashTable(int k, int p, int c);
     ~HashTable();
 

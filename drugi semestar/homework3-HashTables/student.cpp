@@ -2,7 +2,7 @@
 
 void Student::printStudent(){
 
-    cout<<this->brIndexa<<" "<<this->imePrezime<<" "<<listaPredmeta<< " || ";
+    cout<<this->brIndexa<<", "<<this->imePrezime<<", "<<listaPredmeta<< " || ";
 //    cout<<"ovde si";
 
 }
@@ -34,5 +34,9 @@ Student::Student(const Student *student) {
     this->imePrezime=student->getImePrezime();
     this->listaPredmeta=student->getListaPredmeta();
     this->brIndexa=student->getBrIndexa();
+}
+
+Student::Student() {
+
 }
 

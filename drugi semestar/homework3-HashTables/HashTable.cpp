@@ -9,6 +9,7 @@ HashTable::HashTable(int k, int p, int c) {
         this->buckets[i].info=Empty;
         this->buckets[i].size=k;
     }
+
 }
 
 int HashTable::HashFunc(int key) {
@@ -21,7 +22,7 @@ bool HashTable::insertKey(int key, Student* s) {
     if(findKey(s->getBrIndexa())!= nullptr) return false;
     int h= HashFunc(key);
     if(this->buckets[h].info==Empty){
-        StudentNode* node= new StudentNode;
+        StudentNode* node= new StudentNode(s);
         node->student=s;
         buckets[h].head=node;
         buckets[h].info=NotEmpty;
@@ -31,7 +32,7 @@ bool HashTable::insertKey(int key, Student* s) {
     }
     else if(this->buckets[h].info==NotEmpty){
 //        StudentNode node=StudentNode(s);
-        StudentNode* node= new StudentNode;
+        StudentNode* node= new StudentNode(s);
         node->student=s;
         StudentNode* tmp=buckets[h].head;
         while(tmp->next!= nullptr)tmp=tmp->next;
@@ -45,11 +46,11 @@ bool HashTable::insertKey(int key, Student* s) {
     }
     else if(this->buckets[h].info==Full){
         for (int i=0; i<pow(2, this->p); i++){
-            int q=(h+i*i*this->c)%this->p;
+            int q=(h+i*i*this->c)%(int(pow(2, this->p)));
             if (this->buckets[q].info!=Full){
                 //umetanje na novu izracunatu adresu
                 if(this->buckets[h].info==Empty){
-                    StudentNode* node= new StudentNode;
+                    StudentNode* node= new StudentNode(s);
                     node->student=s;
                     buckets[h].head=node;
                     buckets[h].info=NotEmpty;
@@ -57,16 +58,16 @@ bool HashTable::insertKey(int key, Student* s) {
                     if(brKljuceva==buckets[h].size)buckets[h].info=Full;
                     return true;
                 }
-                else if(this->buckets[h].info==NotEmpty){
-                    StudentNode* node= new StudentNode;
+                else if(this->buckets[q].info==NotEmpty){
+                    StudentNode* node= new StudentNode(s);
                     node->student=s;
-                    StudentNode* tmp=buckets[h].head;
+                    StudentNode* tmp=buckets[q].head;
                     while(tmp->next!= nullptr)tmp=tmp->next;
                     tmp->next=node;
                     node->prev=tmp;
                     tmp=node;
                     brKljuceva++;
-                    if(brKljuceva==buckets[h].size)buckets[h].info=Full;
+                    if(brKljuceva==buckets[q].size)buckets[q].info=Full;
                     return true;
                 }
 
@@ -84,6 +85,10 @@ StudentNode* HashTable::findKey(int k) {
         return nullptr;
     }
     else if (this->buckets[h].info==NotEmpty){
+        int i=1;
+        while(( bucketTraverse(&buckets[h], k))== nullptr){
+            h=(h+(i*i* this->c))%(int(pow(2, this->p)));
+        }
         return bucketTraverse(&buckets[h], k);
     }
     return nullptr;
@@ -93,7 +98,9 @@ StudentNode* HashTable::bucketTraverse(HashNode* b, int k) const{
     int i;
     StudentNode* tmp=b->head;
     for(i=0; i<b->size; i++){
-        if(tmp->student->getBrIndexa()==k) return tmp;
+        if(tmp) {
+            if (tmp->student.getBrIndexa() == k) return tmp;
+        }
     }
     return nullptr;
 }
@@ -106,14 +113,17 @@ bool HashTable::deleteKey(Student* s) {
         int i;
         StudentNode* tmp= this->buckets[h].head;
         for(i=0; i<buckets[h].size; i++){
-            if(tmp->student->getBrIndexa()==k) {
+            if(tmp->student.getBrIndexa()==k) {
                 tmp->info=Deleted;
                 this->brKljuceva--;
+                tmp=tmp->next;
                 return true;
             }
         }
         return false;
     }
+        return false;
+
 }
 
 void HashTable::clear() {
@@ -150,7 +160,7 @@ ostream &operator<<(ostream &os, HashTable& ht) {
                     tmp=tmp->next;
                     continue;
                 }
-                tmp->student->printStudent();
+                tmp->student.printStudent();
                 tmp = tmp->next;
                 }
             else

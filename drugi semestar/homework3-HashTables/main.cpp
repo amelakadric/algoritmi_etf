@@ -6,23 +6,25 @@
 
 using  namespace std;
 
-void readFile(char* name, int k, int p, int c){
-    HashTable ht=HashTable(4, 3, 3);
-    char tekst [256];
+HashTable readFile(const char* name, int k, int p, int c){
+    HashTable ht=HashTable(k, p, c);
+    char tekst [1000];
     FILE* file;
     int tmp;
-    char tmpStr1[100], tmpStr2[100];
+    char tmpStr1[256], tmpStr2[500];
     file=fopen( name, "r");
 
     fscanf(file, "%s\n", tekst);
 
+
     while(fscanf(file, "%d,%[^,],%[^\n]\n", &tmp, tmpStr1, tmpStr2)>=1){
         std::string t1(tmpStr1);
         std::string t2(tmpStr2);
-//        cout<<t1;
+
         Student stud=new Student(tmp, t1, t2);
 //        Student stud=Student(tmp, t1, t2);
 //        stud.printStudent();
+//        cout<<&stud;
 //        cout<<endl;
         ht.insertKey(stud.getBrIndexa(), &stud);
         strcpy(tmpStr2, "");
@@ -31,6 +33,7 @@ void readFile(char* name, int k, int p, int c){
     fclose(file);
 
     cout<<ht;
+    return ht;
 
 }
 
@@ -49,12 +52,10 @@ int main() {
 //    cout<<ht<<endl;
 
 
-
-
 //    readFile("students_5.csv", 0, 0, 0);
-//    cout<<"ovde si";
 
-HashTable ht=HashTable(0, 0, 0);
+
+HashTable ht;
     while(true){
         cout << "\n----MENI----\n"
                 "1. Napravi tabelu\n"
@@ -84,12 +85,13 @@ HashTable ht=HashTable(0, 0, 0);
 
                 }
                 else{
-                    char* name;
+                    string name;
                     cout<<"Ime datoteke: ";
                     cin>>name;
                     cout<<"Parametri tabele: ";
                     cin>>k>>p>>c;
-                    readFile(name, k, p, c);
+                    const char *nam=name.c_str();
+                    ht=readFile(nam, k, p, c);
                 }
                 break;
             case 2:
@@ -105,10 +107,12 @@ HashTable ht=HashTable(0, 0, 0);
                 ht.insertKey(k, &stu);}
 
                 break;
-            case 3:
-                cout<<"Unesite kljuc: ";
-                cin>>k;
-                cout<<ht.findKey(k);
+            case 3: {
+                cout << "Unesite kljuc: ";
+                cin >> k;
+                StudentNode *stN = ht.findKey(k);
+                stN->student.printStudent();
+            }
                 break;
             case 4: {
                 cout << "Unesite kljuc: ";
